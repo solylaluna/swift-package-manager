@@ -9,13 +9,14 @@
 */
 
 import Basics
-import TSCBasic
-import TSCUtility
 import Foundation
+import OrderedCollections
 import PackageLoading
 import PackageModel
 import PackageGraph
 import SourceControl
+import TSCBasic
+import TSCUtility
 
 public typealias Diagnostic = TSCBasic.Diagnostic
 
@@ -1312,8 +1313,8 @@ extension Workspace {
         }
 
         /// Returns all manifests contained in DependencyManifests.
-        public func allDependencyManifests() -> OrderedDictionary<PackageIdentity, Manifest> {
-            return self.dependencies.reduce(into: OrderedDictionary<PackageIdentity, Manifest>()) { partial, item in
+        public func allDependencyManifests() -> OrderedCollections.OrderedDictionary<PackageIdentity, Manifest> {
+            return self.dependencies.reduce(into: OrderedCollections.OrderedDictionary<PackageIdentity, Manifest>()) { partial, item in
                 partial[item.dependency.packageRef.identity] = item.manifest
             }
         }
