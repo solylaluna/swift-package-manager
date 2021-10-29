@@ -350,6 +350,14 @@ internal final class SourceControlPackageContainer: PackageContainer, CustomStri
     public var description: String {
         return "SourceControlPackageContainer(\(self.repositorySpecifier))"
     }
+
+    func getFileSystem(at version: Version) throws -> FileSystem? {
+        return try repository.openFileView(tag: version.description)
+    }
+
+    func getFileSystem(at revision: String) throws -> FileSystem? {
+        return try repository.openFileView(revision: Revision(identifier: revision))
+    }
 }
 
 fileprivate extension Git {
